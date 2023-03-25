@@ -1,21 +1,23 @@
 <template>
-  <div class="hello">
-    <div class="editor-box">
-      <code-editor
-        class=""
-        :languages="[['pascal', 'PASCAL']]"
-        v-model="code"
-        font_size="12px"
-        min_height="250px"
-        wrap_code
-        @keyup.ctrl.enter="onClick"
-        @keyup.meta.enter="onClick"
-      />
+  <div class="flex">
+    <div class="hello">
+      <div class="editor-box">
+        <code-editor
+          class=""
+          :languages="[['pascal', 'PASCAL']]"
+          v-model="code"
+          font_size="12px"
+          min_height="250px"
+          wrap_code
+          @keyup.ctrl.enter="onClick"
+          @keyup.meta.enter="onClick"
+        />
+      </div>
+      <div v-if="errors.length > 0">{{ errors.join(', ') }}</div>
+      <button @click="onClick" class="button mb">test</button>
     </div>
-    <div v-if='errors.length > 0'>{{errors.join(', ')}}</div>
-    <button @click="onClick" class="button mb">test</button>
-    <div class="table-box" v-if='table.length > 0'>
-      <TableToken :data="table" />
+    <div class="table-box">
+      <TableToken :data="table" v-if="table.length > 0" />
     </div>
   </div>
 </template>
@@ -38,6 +40,9 @@ const onClick = () => {
 </script>
 
 <style scoped lang="sass">
+.flex
+  display: flex
+  justify-content: space-around
 .editor-box
   display: flex
   justify-content: center

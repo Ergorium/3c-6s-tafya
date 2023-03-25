@@ -188,6 +188,12 @@ export class LexicalParser {
     this.next()
     this.add()
     this.log('State I')
+    if ((this.buffer + this.active).length > 8) {
+      throw new LexicalException(
+        'Слишком длинное им переменной',
+        (this.buffer + this.active) as string
+      )
+    }
     if (/[a-zA-Z_]/.test(this.active as string)) {
       return this.i()
     }
