@@ -1,38 +1,7 @@
-enum TokenType {
-  var = 'var',
-  integer = 'integer',
-  real = 'real',
-  string = 'string',
-  begin = 'begin',
-  end = 'end',
-  repeat = 'repeat',
-  until = 'until',
-  comma = ',',
-  dot = '.',
-  colon = ':',
-  semicolon = ';',
-  gt = '>',
-  lt = '<',
-  equals = '=',
-  lpar = '(',
-  rpar = ')',
-  plus = '+',
-  minus = '-',
-  multy = '*',
-  delimiter = '/',
-  id = 'id',
-  literal = 'literal',
-}
-
-export class Token {
-  public id: string
-  constructor(public type: TokenType, public value: string = '') {
-    this.id = new Date() + value
-  }
-  toString() {
-    return `${this.type}, ${this.value}`
-  }
-}
+import LexicalException from './LexicalException'
+import { Token } from './Token'
+import { TokenType } from './TokenType'
+import UndefinedSymbolException from './UndefinedSymbolException'
 
 const Delimiters: TokenType[] = [
   TokenType.comma,
@@ -57,7 +26,7 @@ const SpecialWords: Record<string, TokenType> = {
   begin: TokenType.begin,
   end: TokenType.end,
   repeat: TokenType.repeat,
-  untill: TokenType.until,
+  until: TokenType.until,
 }
 const SpectialSymbols: Record<string, TokenType> = {
   ',': TokenType.comma,
@@ -81,16 +50,6 @@ class EndException extends Error {
    */
   constructor() {
     super()
-  }
-}
-class UndefinedSymbolException extends Error {
-  constructor(m: string, buffer: string) {
-    super(m + ': ' + buffer)
-  }
-}
-class LexicalException extends Error {
-  constructor(m: string, buffer: string) {
-    super(m + ': ' + buffer)
   }
 }
 

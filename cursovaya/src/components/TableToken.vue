@@ -1,7 +1,7 @@
 <template>
   <div class="table">
-    <h3>Lexems</h3>
-    <div v-for="t in props.data" :key="t.id" class="row">
+    <h3>Tokens</h3>
+    <div v-for="(t, id) in props.data" :key="id + t.id" class="row">
       <div class="item">type: {{ t.type }}</div>
       <div class="item">value: {{ t.value }}</div>
     </div>
