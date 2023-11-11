@@ -2,6 +2,10 @@ import { Token } from './Token'
 import { TokenType } from './TokenType'
 import { SyntaxError } from './SyntaxError'
 
+interface IRules {
+  [key: string]: () => void
+}
+
 export class SyntaxParser {
   private currentToken!: Token
 
@@ -17,7 +21,7 @@ export class SyntaxParser {
     this.rules['<программа>']()
   }
 
-  private rules = {
+  private rules: IRules = {
     '<программа>': () => {
       switch (this.currentToken.type) {
         case TokenType.var:
